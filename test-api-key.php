@@ -61,6 +61,8 @@ $data = [
     "telephone" => $telephone,
 ];
 
+$applicants = http_build_query($data);
+
 function submit($data) {
     $curl = curl_init();
     $header = array();
@@ -71,7 +73,7 @@ function submit($data) {
     curl_setopt($curl, CURLOPT_HTTPHEADER, $header);        
     curl_setopt($curl, CURLOPT_URL, "https://https://api.smartr365.com/api/v1/mortgage/lead/create");
     curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $applicants);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($curl);
     echo $response;
@@ -84,5 +86,6 @@ echo "var_dump". "<br>";
 var_dump($_POST);
 var_dump($data);
 var_dump(headers_list());
+var_dump($applicants);
 ?>
 
